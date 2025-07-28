@@ -2,6 +2,6 @@ services:
   - type: web
     name: bike-sharing-api
     env: python
-    pythonVersion: "3.11"
-    buildCommand: pip install -r requirements.txt
+    pythonVersion: "3.11.18"
+    buildCommand: pip install -r api/requirements.txt
     startCommand: uvicorn api.api:app --host 0.0.0.0 --port $PORT 
