@@ -1,7 +1,7 @@
 # Bike Sharing Demand Prediction
 
 ## Mission and Problem
-**Mission**: Sustainable Urban Mobility - Predicting Bike Rental Demand  
+**Mission**: Our mission is to promote sustainable urban mobility by accurately predicting daily bike rental demand. By analyzing weather patterns, temporal factors, and seasonal trends, we enable better forecasting of usage patterns. This helps optimize bike availability, reduce urban congestion, and support data-driven city planning.
 **Problem**: Predict daily bike rentals to optimize bike availability and reduce urban congestion. The model analyzes weather conditions, temporal factors, and seasonal patterns to forecast demand, enabling better resource allocation and improved urban mobility planning.
 
 ## Project Structure
