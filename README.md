@@ -130,12 +130,3 @@ curl -X POST "https://linear-regression-model-69lm.onrender.com/predict" \
 - **Deployment**: Render
 - **Data**: Bike sharing dataset
 
-## Next Steps
-
-1. **Video Demo**: Create a 5-minute demo video showing the mobile app and Swagger UI
-2. **Documentation**: Update README with video link
-3. **Testing**: Comprehensive testing of the complete workflow
-
----
-
-**⚠️ IMPORTANT**: Remember to create your 5-minute video demo showing both the mobile app and Swagger UI functionality!

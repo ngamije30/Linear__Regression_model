@@ -114,8 +114,3 @@ class PredictionProvider with ChangeNotifier {
     }
   }
 }
-
-ChangeNotifierProvider(
-  create: (_) => PredictionProvider(),
-  child: MyApp(),
-)
