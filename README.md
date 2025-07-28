@@ -130,3 +130,6 @@ curl -X POST "https://linear-regression-model-69lm.onrender.com/predict" \
 - **Deployment**: Render
 - **Data**: Bike sharing dataset
 
+Video demo link : https://www.loom.com/share/4469f0e0a0d64851b7f6e55f788306b4?sid=335d09aa-b093-4df3-8407-47f64b18060a
+
+github link: https://github.com/ngamije30/Linear__Regression_model.git
