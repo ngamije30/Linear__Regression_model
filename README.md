@@ -1,238 +1,141 @@
 # Bike Sharing Demand Prediction
 
-## Mission and Problem
-**Mission**: Our mission is to promote sustainable urban mobility by accurately predicting daily bike rental demand. By analyzing weather patterns, temporal factors, and seasonal trends, we enable better forecasting of usage patterns. This helps optimize bike availability, reduce urban congestion, and support data-driven city planning.
-**Problem**: Predict daily bike rentals to optimize bike availability and reduce urban congestion. The model analyzes weather conditions, temporal factors, and seasonal patterns to forecast demand, enabling better resource allocation and improved urban mobility planning.
+A comprehensive machine learning project that predicts bike rental demand using linear regression, with a FastAPI backend and Flutter mobile app.
 
 ## Project Structure
 
 ```
 Linear__Regression_model/
-│
-├── summative/
-│   ├── linear_regression/
-│   │   ├── bike_sharing_analysis.ipynb
-│   │   ├── best_model.pkl
-│   │   ├── scaler.pkl
-│   │   └── feature_columns.pkl
-│   ├── API/
-│   │   ├── main.py
-│   │   ├── requirements.txt
-│   │   └── test_api.py
-│   └── FlutterApp/
-│       ├── pubspec.yaml
-│       └── lib/
-│           ├── main.dart
-│           ├── providers/
-│           │   └── prediction_provider.dart
-│           └── screens/
-│               ├── home_screen.dart
-│               ├── prediction_screen.dart
-│               └── about_screen.dart
-├── day.csv
-├── hour.csv
+├── api/                          # FastAPI backend
+│   ├── api.py                   # Main API file
+│   ├── requirements.txt          # Python dependencies
+│   └── test_api.py              # API testing script
+├── summative/                    # Machine learning analysis
+│   └── linear_regression/
+│       ├── bike_sharing_analysis.ipynb  # Jupyter notebook
+│       ├── best_model.pkl       # Trained model
+│       ├── scaler.pkl           # Feature scaler
+│       └── feature_columns.pkl  # Feature columns
+├── FlutterApp/                   # Mobile application
+│   └── bike_sharing_prediction/
+│       ├── lib/
+│       │   ├── main.dart
+│       │   ├── config/
+│       │   ├── providers/
+│       │   └── screens/
+│       └── pubspec.yaml
+├── day.csv                       # Daily bike sharing data
+├── hour.csv                      # Hourly bike sharing data
 └── README.md
 ```
 
 ## API Endpoint
 
+**Deployed API URL**: `https://linear-regression-model-69lm.onrender.com`
+
+**Swagger UI**: `https://linear-regression-model-69lm.onrender.com/docs`
+
 **Local API URL**: `http://127.0.0.1:8000` (for development)
 
-**Public API URL**: `https://your-api-url.com` (Replace with your actual deployed API URL)
-
-**Swagger UI**: `http://127.0.0.1:8000/docs` (local) or `https://your-api-url.com/docs` (deployed)
-
-**⚠️ IMPORTANT**: 
+**⚠️ IMPORTANT**:
 1. For local testing, use `http://127.0.0.1:8000`
-2. For production, deploy your API to a hosting platform like Render, Heroku, or Railway
-3. Update the Flutter app with your deployed API URL
+2. For production, the API is deployed at `https://linear-regression-model-69lm.onrender.com`
+3. The Flutter app is configured to use the deployed API URL
 
 **Prediction Endpoint**: `POST /predict`
 
-### API Features:
-- ✅ CORS middleware enabled
-- ✅ Input validation with Pydantic models
-- ✅ Range constraints for all numeric inputs
-- ✅ Data type enforcement
-- ✅ Error handling and validation
-- ✅ Confidence scoring
-- ✅ Swagger UI documentation
+## Features
 
-### Sample API Request:
-```json
-{
-  "season": 2,
-  "yr": 1,
-  "mnth": 6,
-  "holiday": 0,
-  "weekday": 1,
-  "workingday": 1,
-  "weathersit": 1,
-  "temp": 0.5,
-  "atemp": 0.5,
-  "hum": 0.6,
-  "windspeed": 0.2,
-  "day_of_year": 150,
-  "month": 6,
-  "day_of_week": 1
-}
+### Machine Learning
+- **Linear Regression Model**: Predicts bike rental demand
+- **Feature Engineering**: Temporal, weather, and interaction features
+- **Data Visualization**: Comprehensive analysis with plots and charts
+- **Model Comparison**: Linear Regression vs Decision Tree vs Random Forest
+- **Model Persistence**: Saved using pickle for API integration
+
+### API (FastAPI)
+- **RESTful API**: FastAPI with automatic documentation
+- **Input Validation**: Pydantic models with constraints
+- **CORS Support**: Cross-origin resource sharing enabled
+- **Error Handling**: Comprehensive error responses
+- **Swagger UI**: Interactive API documentation
+
+### Mobile App (Flutter)
+- **Cross-platform**: Works on Android and iOS
+- **API Integration**: Connects to deployed API
+- **User-friendly UI**: Multiple screens with input validation
+- **Real-time Predictions**: Get bike rental predictions instantly
+- **Error Handling**: User-friendly error messages
+
+## Quick Start
+
+### 1. Run the API Locally
+```bash
+cd api
+pip install -r requirements.txt
+python api.py
 ```
 
-### Sample API Response:
-```json
-{
-  "predicted_rentals": 2345,
-  "confidence": 0.85,
-  "message": "Predicted 2345 bike rentals for the given conditions"
-}
+### 2. Run the Mobile App
+```bash
+cd FlutterApp/bike_sharing_prediction
+flutter pub get
+flutter run
+```
+
+### 3. Access API Documentation
+- **Local**: http://127.0.0.1:8000/docs
+- **Deployed**: https://linear-regression-model-69lm.onrender.com/docs
+
+## API Usage
+
+### Health Check
+```bash
+curl https://linear-regression-model-69lm.onrender.com/health
+```
+
+### Make a Prediction
+```bash
+curl -X POST "https://linear-regression-model-69lm.onrender.com/predict" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "season": 2,
+    "yr": 1,
+    "mnth": 6,
+    "holiday": 0,
+    "weekday": 1,
+    "workingday": 1,
+    "weathersit": 1,
+    "temp": 0.5,
+    "atemp": 0.5,
+    "hum": 0.6,
+    "windspeed": 0.2,
+    "day_of_year": 150,
+    "month": 6,
+    "day_of_week": 1
+  }'
 ```
 
 ## Model Performance
 
-- **Best Model**: Random Forest Regressor
-- **R² Score**: 0.92
-- **Mean Absolute Error**: 156 rentals
-- **Features Used**: 21 engineered features including weather, temporal, and interaction features
+- **R² Score**: 0.85+
+- **Mean Absolute Error**: < 200 rentals
+- **Features**: 21 engineered features including temporal, weather, and interaction features
 
-## How to Run the API and Mobile App
+## Technologies Used
 
-### Step 1: Generate Models
-```bash
-# Generate the model files using pickle
-python generate_models.py
-```
+- **Machine Learning**: Scikit-learn, NumPy, Pandas
+- **API**: FastAPI, Pydantic, Uvicorn
+- **Mobile**: Flutter, Dart
+- **Deployment**: Render
+- **Data**: Bike sharing dataset
 
-### Step 2: Start the API
-```bash
-# Start the API server
-python api/api.py
-```
+## Next Steps
 
-### Step 3: Test the API
-```bash
-# Test the API endpoints
-python api/test_api.py
-```
-
-### Step 4: Run the Mobile App
-
-### Prerequisites:
-1. Install Flutter SDK (version 3.0.0 or higher)
-2. Install Android Studio or Xcode for mobile development
-3. Set up an Android emulator or iOS simulator
-
-### Steps to Run:
-
-1. **Navigate to the Flutter app directory:**
-   ```bash
-   cd FlutterApp
-   ```
-
-2. **Install dependencies:**
-   ```bash
-   flutter pub get
-   ```
-
-3. **Update API URL:**
-   - Open `lib/providers/prediction_provider.dart`
-   - Replace `'https://your-api-url.com'` with your actual API URL
-
-4. **Run the app:**
-   ```bash
-   flutter run
-   ```
-
-### App Features:
-- ✅ Multiple pages (Home, Prediction, About)
-- ✅ Input validation for all 14 required fields
-- ✅ Real-time API integration
-- ✅ Error handling and display
-- ✅ Loading states
-- ✅ Clean, organized UI
-- ✅ Responsive design
-
-### Input Fields:
-1. Season (1-4)
-2. Year (0-1)
-3. Month (1-12)
-4. Holiday (0-1)
-5. Weekday (0-6)
-6. Working Day (0-1)
-7. Weather Situation (1-4)
-8. Temperature (0.0-1.0)
-9. Feeling Temperature (0.0-1.0)
-10. Humidity (0.0-1.0)
-11. Wind Speed (0.0-1.0)
-12. Day of Year (1-366)
-13. Month (1-12)
-14. Day of Week (0-6)
-
-## Video Demo
-
-**YouTube Video Link**: [Your 5-minute demo video link here]
-
-**⚠️ IMPORTANT**: You need to create and upload a 5-minute video demo showing:
-- Mobile app making predictions
-- Swagger UI API testing
-- Data type and range validation
-- Model creation and performance explanation
-- Justification of model selection
-
-The video demonstrates:
-- Mobile app making predictions
-- Swagger UI API testing
-- Data type and range validation
-- Model creation and performance explanation
-- Justification of model selection
-
-## Technical Implementation
-
-### Backend (FastAPI):
-- **Framework**: FastAPI with Python
-- **Validation**: Pydantic models with range constraints
-- **Middleware**: CORS enabled
-- **Deployment**: Render hosting
-- **Documentation**: Auto-generated Swagger UI
-
-### Frontend (Flutter):
-- **Framework**: Flutter with Dart
-- **State Management**: Provider pattern
-- **HTTP Client**: http package
-- **UI**: Material Design 3
-- **Navigation**: Multiple screens with routing
-
-### Machine Learning:
-- **Algorithm**: Linear Regression, Decision Tree, Random Forest
-- **Library**: Scikit-learn
-- **Feature Engineering**: 21 engineered features
-- **Data Preprocessing**: Standardization
-- **Model Persistence**: Joblib serialization
-
-## Dataset Information
-
-- **Source**: Bike Sharing Dataset
-- **Records**: 733 daily records
-- **Features**: Weather conditions, temporal factors, seasonal patterns
-- **Target**: Daily bike rental count
-- **Mission Relevance**: Urban mobility optimization
-
-## Key Insights
-
-1. **Temperature Impact**: Strong correlation between temperature and rental demand
-2. **Seasonal Patterns**: Clear demand variations across seasons
-3. **Weather Sensitivity**: Weather conditions significantly affect rentals
-4. **Temporal Factors**: Working days vs weekends show different patterns
-5. **Model Performance**: Random Forest achieved best performance with 92% R² score
-
-## Future Enhancements
-
-- Real-time weather data integration
-- Geographic location-based predictions
-- User preference learning
-- Advanced ensemble methods
-- Mobile app push notifications
-- Historical trend analysis
+1. **Video Demo**: Create a 5-minute demo video showing the mobile app and Swagger UI
+2. **Documentation**: Update README with video link
+3. **Testing**: Comprehensive testing of the complete workflow
 
 ---
 
-**Note**: Replace placeholder URLs with your actual deployed API endpoint and video demo link before submission.
+**⚠️ IMPORTANT**: Remember to create your 5-minute video demo showing both the mobile app and Swagger UI functionality!
